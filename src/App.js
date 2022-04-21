@@ -1,8 +1,15 @@
 import { Component } from "react";
 import Count from "./containers/Count/index";
+import Person from "./containers/Person/index";
 
 export default class App extends Component {
   render() {
-    return <Count></Count>;
+    return (
+      <div>
+        <Count></Count>
+        <hr></hr>
+        <Person></Person>
+      </div>
+    );
   }
 }

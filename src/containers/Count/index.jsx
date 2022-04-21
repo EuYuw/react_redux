@@ -9,7 +9,7 @@ import {
   createIncrementAction,
   createDecrementAction,
   createIncrementAsyncAction,
-} from "../../redux/count_action";
+} from "../../redux/actions/count";
 
 // UI组件
 class CountUI extends Component {
@@ -30,10 +30,11 @@ class CountUI extends Component {
 
   render() {
     console.log(this.props);
-
     return (
       <div>
-        <h2>当前和为: {this.props.count}</h2>
+        <h2>Count组件</h2>
+        <h4>当前和为: {this.props.count}</h4>
+        <h4>Person组件人员数量为: {this.props.personLength}</h4>
         <div>
           <select
             ref={(n) => {
@@ -86,8 +87,11 @@ class CountUI extends Component {
 /**
  * react-redux connet生成容器组件简化写法
  */
-export default connect((state) => ({ count: state }), {
-  inCrement: createIncrementAction, // UI组件调用时，相当于调用的创建一般action的方法，action返回后reac-redux自动dispatch
-  deCrement: createDecrementAction,
-  inCrementAsync: createIncrementAsyncAction,
-})(CountUI);
+export default connect(
+  (state) => ({ count: state.count, personLength: state.personList.length }),
+  {
+    inCrement: createIncrementAction, // UI组件调用时，相当于调用的创建一般action的方法，action返回后reac-redux自动dispatch，API层的优化
+    deCrement: createDecrementAction,
+    inCrementAsync: createIncrementAsyncAction,
+  }
+)(CountUI);
